@@ -1,16 +1,19 @@
 export interface BookCardProps {
   id?: string;
   title: string;
-  authors: string[];
+  authors: {
+    name: string;
+  }[];
   summaries: string[];
   bookshelves: string[];
 }
 
 export default function BookCard(props: BookCardProps) {
+  console.log(props.authors);
   return (
     <div>
       <h3>{props.title}</h3>
-      <h4>{props.authors.join(", ")}</h4>
+      <h4>{props.authors.map((author) => author.name).join(", ")}</h4>
       <p>
         {props.summaries.length > 0
           ? props.summaries[0]
