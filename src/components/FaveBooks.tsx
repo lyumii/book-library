@@ -1,13 +1,27 @@
+import { useState, useEffect } from "react";
 import BookCard, { BookCardProps } from "./BookCard";
 
-export default function FaveBooks() {
-  const favorites: BookCardProps[] = JSON.parse(
-    localStorage.getItem("favorites") || "[]"
-  );
+interface faveBookProps {
+  removeFavorites: (bookId: string) => void;
+}
+
+export default function FaveBooks(props: faveBookProps) {
+  const [favorites, setFavorites] = useState<BookCardProps[]>([]);
+
+  useEffect(() => {
+    const storedFaves = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setFavorites(storedFaves);
+  }, []);
+
   const clear = () => {
     localStorage.clear();
-    console.log(`cleared`);
   };
+
+  const handleRemove = (bookId: string) => {
+    props.removeFavorites(bookId);
+    setFavorites((prevFavs) => prevFavs.filter((book) => bookId !== book.id));
+  };
+
   return (
     <div>
       <h2>My favorite books</h2>
@@ -21,7 +35,7 @@ export default function FaveBooks() {
             summaries={book.summaries}
             bookshelves={book.bookshelves}
             addFavorite={() => {}}
-            removeFavorite={() => {}}
+            removeFavorite={handleRemove}
           />
         ))
       ) : (
