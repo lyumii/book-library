@@ -2,7 +2,12 @@ import { fetchBooksSearch } from "./api";
 import React from "react";
 import BookCard, { BookCardProps } from "./BookCard";
 
-export default function Home() {
+interface HomeProps {
+  addFavorite: (book: BookCardProps) => void;
+  removeFavorite: (bookId: string) => void;
+}
+
+export default function Home(props: HomeProps) {
   const [search, setSearch] = React.useState("");
   const [books, setBooks] = React.useState<BookCardProps[]>([]);
   const [loading, setLoading] = React.useState(false);
@@ -33,11 +38,13 @@ export default function Home() {
       ) : (
         books.map((book) => (
           <BookCard
-            key={book.id}
+            key={book.id + book.title}
             title={book.title}
             authors={book.authors}
             summaries={book.summaries}
             bookshelves={book.bookshelves}
+            addFavorite={props.addFavorite}
+            removeFavorite={props.removeFavorite}
           />
         ))
       )}

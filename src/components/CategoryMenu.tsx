@@ -2,7 +2,12 @@ import { useState } from "react";
 import BookCard, { BookCardProps } from "./BookCard";
 import { fetchBooksCategory } from "./api";
 
-export default function CategoryMenu() {
+interface CategoryProps {
+  addFavorite: (book: BookCardProps) => void;
+  removeFavorite: (bookId: string) => void;
+}
+
+export default function CategoryMenu(props: CategoryProps) {
   const [categoryArray, setCategoryArray] = useState<BookCardProps[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -67,11 +72,13 @@ export default function CategoryMenu() {
         ) : (
           categoryArray.map((book) => (
             <BookCard
-              key={book.id}
+              key={book.id + book.title}
               title={book.title}
               authors={book.authors}
               summaries={book.summaries}
               bookshelves={book.bookshelves}
+              addFavorite={props.addFavorite}
+              removeFavorite={props.removeFavorite}
             />
           ))
         )}

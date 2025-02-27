@@ -6,9 +6,25 @@ export interface BookCardProps {
   }[];
   summaries: string[];
   bookshelves: string[];
+  addFavorite: (book: BookCardProps) => void;
+  removeFavorite: (bookId: string) => void;
 }
 
 export default function BookCard(props: BookCardProps) {
+  const handleBtnClick = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const isFavored = favorites.some(
+      (book: BookCardProps) => book.id === props.id
+    );
+    if (isFavored) {
+      if (props.id) {
+        props.removeFavorite(props.id);
+      }
+    } else {
+      props.addFavorite(props);
+    }
+    console.log(`btn clicked`);
+  };
   return (
     <div>
       <h3>{props.title}</h3>
@@ -23,6 +39,7 @@ export default function BookCard(props: BookCardProps) {
           <li key={index}>{shelf}</li>
         ))}
       </ul>
+      <button onClick={handleBtnClick}>fave me</button>
     </div>
   );
 }
