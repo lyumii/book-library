@@ -9,7 +9,6 @@ export interface BookCardProps {
 }
 
 export default function BookCard(props: BookCardProps) {
-  console.log(props.authors);
   return (
     <div>
       <h3>{props.title}</h3>
