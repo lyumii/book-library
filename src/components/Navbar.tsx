@@ -38,7 +38,7 @@ export default function Navbar() {
   const formatToday = `${dayName}, ${day}.${month}.${year}`;
 
   return (
-    <div className="navdiv lg:h-40 sm:h-auto flex flex-col justify-around gap-5 bg-[#faf3e0] rounded-lg shadow-lg">
+    <div className="navdiv lg:h-40 sm:h-auto flex flex-col justify-around gap-5 bg-[#faf3e0] dark:bg-black rounded-lg shadow-lg">
       <div className="flex flex-col gap-0">
         <h1 className="sm:text-2xl lg:text-5xl font-semibold text-[#2E2E2E] uppercase tracking-wide">
           the gutendex times

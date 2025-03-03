@@ -4,6 +4,8 @@ import FaveBooks from "./components/FaveBooks";
 import Navbar from "./components/Navbar";
 import CategoryMenu from "./components/CategoryMenu";
 import { BookCardProps } from "./components/BookCard";
+import Theme from "./components/Theme";
+import ToggleSwitch from "./components/ToggleSwitch";
 
 function App() {
   const addFavorite = (book: BookCardProps) => {
@@ -22,9 +24,11 @@ function App() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
   return (
-    <>
+    <Theme>
       <div className="p-5">
+        <ToggleSwitch />
         <Navbar />
+
         <Routes>
           <Route
             path="/"
@@ -50,7 +54,7 @@ function App() {
           />
         </Routes>
       </div>
-    </>
+    </Theme>
   );
 }
 
