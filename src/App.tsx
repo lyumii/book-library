@@ -23,7 +23,7 @@ function App() {
   };
   return (
     <>
-      <div>
+      <div className="p-5">
         <Navbar />
         <Routes>
           <Route

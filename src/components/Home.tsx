@@ -26,27 +26,39 @@ export default function Home(props: HomeProps) {
 
   return (
     <div>
-      <div>
-        <h2>Explore our library:</h2>
-        <form onSubmit={handleSearch}>
-          <input type="text" onChange={handleInput} />
-          <button type="submit">Search</button>
+      <div className="flex flex-col gap-3 mt-5">
+        <form
+          className="flex flex-col gap-2 align-center"
+          onSubmit={handleSearch}
+        >
+          <input
+            className="w-full border-1 border-[#B5A38A] shadow-lg"
+            type="text"
+            placeholder="EXPLORE OUR LIBRARY"
+            onChange={handleInput}
+          />
+          <button className="w-full bg-[#B5A38A] shadow-lg" type="submit">
+            Search
+          </button>
         </form>
       </div>
       {loading ? (
         <div className="spinner"></div>
       ) : (
-        books.map((book) => (
-          <BookCard
-            key={book.id + book.title}
-            title={book.title}
-            authors={book.authors}
-            summaries={book.summaries}
-            bookshelves={book.bookshelves}
-            addFavorite={props.addFavorite}
-            removeFavorite={props.removeFavorite}
-          />
-        ))
+        <section className="bookcards grid grid-cols-2 gap-3">
+          {books.map((book, index) => (
+            <BookCard
+              key={book.id + book.title}
+              className={index % 3 === 0 ? "col-span-2" : "col-span-1"}
+              title={book.title}
+              authors={book.authors}
+              summaries={book.summaries}
+              bookshelves={book.bookshelves}
+              addFavorite={props.addFavorite}
+              removeFavorite={props.removeFavorite}
+            />
+          ))}
+        </section>
       )}
     </div>
   );

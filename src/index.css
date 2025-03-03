@@ -1,21 +1,70 @@
+@import "tailwindcss";
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: #333;
-  color: aliceblue;
+  background-color: #faf7ed;
+  margin: auto;
+  font-family: "Courier Prime", serif;
 }
 
 a:visited {
   color: white;
 }
 
+.navdiv {
+  font-family: "Playfair Display", serif;
+  padding: 1em;
+}
+
+@media (max-width: 600px) {
+  .navdiv h1 {
+    font-size: 1em;
+    font-weight: 800;
+  }
+
+  .navdiv h2 {
+    font-size: 0.7em;
+    font-weight: 700;
+  }
+
+  .navdiv nav {
+    font-size: 0.7em;
+    display: block;
+    position: relative;
+  }
+
+  .navdiv p {
+    font-size: 0.9em;
+    position: absolute;
+    bottom: -10;
+    right: 0;
+    margin: 5px 0;
+  }
+
+  .bookcards {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bookcards p {
+    font-size: 0.8em;
+  }
+
+  .categorymaindiv {
+    margin-left: 4px;
+  }
+
+  .selectdiv {
+    font-size: 0.8em;
+  }
+}
+
 .spinner {
-  border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #3498db; /* Blue */
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
   border-radius: 50%;
   width: 40px;
   height: 40px;
