@@ -18,11 +18,26 @@ function App() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
-  const removeFavorites = (bookId: string) => {
+  const removeFavorite = (bookId: string) => {
     let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     favorites = favorites.filter((book: BookCardProps) => book.id !== bookId);
     localStorage.setItem("favorites", JSON.stringify(favorites));
   };
+
+  const handleBtnClick = (book: BookCardProps) => {
+    if (!book.id) return;
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const isFavored = favorites.some(
+      (favBook: BookCardProps) => favBook.id === book.id
+    );
+
+    if (isFavored) {
+      removeFavorite(book.id);
+    } else {
+      addFavorite(book);
+    }
+  };
+
   return (
     <Theme>
       <div className="p-5">
@@ -35,7 +50,8 @@ function App() {
             element={
               <Home
                 addFavorite={addFavorite}
-                removeFavorite={removeFavorites}
+                removeFavorite={removeFavorite}
+                handleBtn={handleBtnClick}
               />
             }
           />
@@ -44,13 +60,14 @@ function App() {
             element={
               <CategoryMenu
                 addFavorite={addFavorite}
-                removeFavorite={removeFavorites}
+                removeFavorite={removeFavorite}
+                handleBtn={handleBtnClick}
               />
             }
           />
           <Route
             path="/favebooks"
-            element={<FaveBooks removeFavorites={removeFavorites} />}
+            element={<FaveBooks removeFavorites={removeFavorite} />}
           />
         </Routes>
       </div>

@@ -13,7 +13,7 @@ export default function FaveBooks(props: faveBookProps) {
     if (sortOrder === "default") return 0;
     if (sortOrder === "sort") return a.title.localeCompare(b.title);
     if (sortOrder === "reverse") return b.title.localeCompare(a.title);
-    return 0; // Default (no sorting)
+    return 0;
   });
 
   useEffect(() => {
@@ -23,16 +23,18 @@ export default function FaveBooks(props: faveBookProps) {
 
   const clear = () => {
     localStorage.clear();
+    setFavorites([]);
   };
 
   const handleRemove = (bookId: string) => {
+    if (!bookId) return;
     props.removeFavorites(bookId);
     setFavorites((prevFavs) => prevFavs.filter((book) => bookId !== book.id));
   };
 
   return (
     <div>
-      <div className="flex  font-semibold gap-3 justify-end mt-5">
+      <div className="flex  font-semibold gap-3 justify-end mt-5 dark:text-orange-100">
         <h2 className="">My favorite books:</h2>
         <select onChange={(e) => setSortOrder(e.target.value)}>
           <option value="default">Default</option>
@@ -43,17 +45,25 @@ export default function FaveBooks(props: faveBookProps) {
 
       {favorites.length > 0 ? (
         sortedBooks.map((book, index) => (
-          <BookCard
-            key={book.id + book.title}
-            className={index % 3 === 0 ? "col-span-2" : "col-span-1"}
-            id={book.id}
-            title={book.title}
-            authors={book.authors}
-            summaries={book.summaries}
-            bookshelves={book.bookshelves}
-            addFavorite={() => {}}
-            removeFavorite={handleRemove}
-          />
+          <div>
+            <BookCard
+              key={book.id + book.title}
+              className={index % 3 === 0 ? "col-span-2" : "col-span-1"}
+              id={book.id}
+              title={book.title}
+              authors={book.authors}
+              summaries={book.summaries}
+              bookshelves={book.bookshelves}
+              addFavorite={() => {}}
+              removeFavorite={handleRemove}
+            />
+            <button
+              className="w-full shadow-lg pl-5 mt-5 text-left bg-[#B5A38A] font-semibold"
+              onClick={() => handleRemove(book.id)}
+            >
+              Remove from Favorites
+            </button>
+          </div>
         ))
       ) : (
         <p>No fave books saved yet</p>

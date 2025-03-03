@@ -7,7 +7,7 @@ export default function ToggleSwitch() {
   const toggleMode = context.toggleMode;
 
   return (
-    <button onClick={toggleMode}>
+    <button className="dark:text-orange-100 pl-1" onClick={toggleMode}>
       Switch to {theme === "light" ? "light" : "dark"}
     </button>
   );
