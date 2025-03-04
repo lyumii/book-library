@@ -48,7 +48,7 @@ function App() {
         <Routes>
           <Route path="/" element={<DynamicLayout />} />
           <Route
-            path="/search"
+            path="/search/:searchValue"
             element={
               <Home
                 addFavorite={addFavorite}

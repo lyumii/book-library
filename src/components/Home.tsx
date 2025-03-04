@@ -1,6 +1,7 @@
 import { fetchBooksSearch } from "./api";
 import { useState, useEffect } from "react";
 import BookCard, { BookCardProps } from "./BookCard";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface HomeProps {
   addFavorite?: (book: BookCardProps) => void;
@@ -13,15 +14,28 @@ export default function Home(props: HomeProps) {
   const [books, setBooks] = useState<BookCardProps[]>([]);
   const [loading, setLoading] = useState(false);
   const [faveUpdates, setFaveUpdates] = useState(false);
+  const navigate = useNavigate();
+  const { searchValue } = useParams();
 
-  const handleSearch = async () => {
-    event?.preventDefault();
-    setLoading(true);
+  const handleSearch = async (event: React.FormEvent) => {
+    event.preventDefault();
     const formattedSearch = search.replace(/\s+/g, "%20");
-    const results = await fetchBooksSearch(formattedSearch);
-    setBooks(results);
-    setLoading(false);
+    navigate(`/search/${formattedSearch}`);
+    // setLoading(true);
+    // const results = await fetchBooksSearch(formattedSearch);
+    // setBooks(results);
+    // setLoading(false);
   };
+
+  useEffect(() => {
+    if (searchValue) {
+      setLoading(true);
+      fetchBooksSearch(searchValue).then((fetchedSearch) => {
+        setBooks(fetchedSearch);
+        setLoading(false);
+      });
+    }
+  }, [searchValue]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
