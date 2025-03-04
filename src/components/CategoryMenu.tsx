@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import BookCard, { BookCardProps } from "./BookCard";
 import { fetchBooksCategory } from "./api";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface CategoryProps {
-  addFavorite: (book: BookCardProps) => void;
-  removeFavorite: (bookId: string) => void;
-  handleBtn: (book: BookCardProps) => void;
+  addFavorite?: (book: BookCardProps) => void;
+  removeFavorite?: (bookId: string) => void;
+  handleBtn?: (book: BookCardProps) => void;
+  class?: string;
 }
 
 export default function CategoryMenu(props: CategoryProps) {
@@ -15,19 +17,37 @@ export default function CategoryMenu(props: CategoryProps) {
   const [isOpen, setIsOpen] = useState(true);
   const [currentCategory, setCurrentCattegory] = useState("");
   const [faveUpdates, setFaveUpdates] = useState(false);
+  const navigate = useNavigate();
 
   const handleCategoryClick = async (
     event: React.MouseEvent<HTMLUListElement>
   ) => {
     const button = (event.target as HTMLElement).closest("button");
     if (button && button.textContent) {
-      setLoading(true);
-      const fetchedBooks = await fetchBooksCategory(button.textContent);
-      setCategoryArray(fetchedBooks);
-      setCurrentCattegory(button.textContent);
-      setLoading(false);
+      const selectedCategory = button.textContent;
+      navigate(`/categories/${selectedCategory}`);
+
+      // setLoading(true);
+
+      // const fetchedBooks = await fetchBooksCategory(button.textContent);
+      // setCategoryArray(fetchedBooks);
+      // setCurrentCattegory(button.textContent);
+      // setLoading(false);
     }
   };
+
+  const { categoryName } = useParams();
+
+  useEffect(() => {
+    if (categoryName) {
+      setLoading(true);
+      fetchBooksCategory(categoryName).then((fetchedBooks) => {
+        setCategoryArray(fetchedBooks);
+        setCurrentCattegory(categoryName);
+        setLoading(false);
+      });
+    }
+  }, [categoryName]);
 
   const sortedArray = [...categoryArray].sort(
     (a: BookCardProps, b: BookCardProps) => {
@@ -48,8 +68,8 @@ export default function CategoryMenu(props: CategoryProps) {
         authors={book.authors}
         summaries={book.summaries}
         bookshelves={book.bookshelves}
-        addFavorite={props.addFavorite}
-        removeFavorite={props.removeFavorite}
+        addFavorite={props.addFavorite ?? (() => {})}
+        removeFavorite={props.removeFavorite ?? (() => {})}
       />
       <button
         className="w-full shadow-lg pl-5 mt-5 text-left bg-[#B5A38A] font-semibold"
@@ -81,6 +101,7 @@ export default function CategoryMenu(props: CategoryProps) {
   ];
 
   const addOrRemoveFaves = (book: BookCardProps) => {
+    if (!props.handleBtn) return;
     props.handleBtn(book);
     setFaveUpdates((prev) => !prev);
   };
@@ -96,7 +117,7 @@ export default function CategoryMenu(props: CategoryProps) {
   }, [categoryArray]);
 
   return (
-    <section className="categorymenu flex gap-3 mt-5 relative">
+    <section className={`categorymenu ${props.class} flex gap-3 mt-5 relative`}>
       {" "}
       <button
         className="absolute z-10 -top-4 -left-4 sm:hidden"

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dynamic (&:where(.dynamic, .dynamic *));
 
 * {
   box-sizing: border-box;
@@ -17,6 +18,18 @@ body {
 
 a:visited {
   color: white;
+}
+
+.dynamic ul {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1em;
+  margin-left: 2em;
+}
+
+.dynamic .hidden {
+  visibility: hidden;
 }
 
 .navdiv {

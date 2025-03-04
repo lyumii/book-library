@@ -52,6 +52,11 @@ export default function Navbar() {
           <Link to="/">
             <span className="text-[#2E2E2E] dark:text-orange-200 uppercase lg:text-xl sm:text-xs font-bold">
               Home
+            </span>{" "}
+          </Link>
+          <Link to="/search">
+            <span className="text-[#2E2E2E] dark:text-orange-200 uppercase lg:text-xl sm:text-xs font-bold">
+              Search
             </span>
           </Link>
           <Link to="/categories">

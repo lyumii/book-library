@@ -33,7 +33,7 @@ export default function BookCard(props: BookCardProps) {
 
   return (
     <div
-      className={`bg-[#faf3e0] dark:bg-stone-800 flex flex-col justify-between mt-5 pb-5 overflow-hidden shadow-xl rounded-lg ${props.className}`}
+      className={`max-w-[100%] bg-[#faf3e0] dark:bg-stone-800 flex flex-col justify-between mt-5 pb-5 overflow-hidden shadow-xl rounded-lg ${props.className}`}
     >
       {" "}
       <div className="text-justify p-5">
@@ -71,12 +71,6 @@ export default function BookCard(props: BookCardProps) {
             </li>
           ))}
         </ul>
-        {/* <button
-          className="w-full shadow-lg pl-5 mt-5 text-left bg-[#B5A38A] font-semibold"
-          onClick={handleBtnClick}
-        >
-          {addOrRemove ? "Remove from Favorites" : "Add to Favorites"}
-        </button> */}
       </div>
     </div>
   );

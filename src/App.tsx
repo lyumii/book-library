@@ -6,6 +6,7 @@ import CategoryMenu from "./components/CategoryMenu";
 import { BookCardProps } from "./components/BookCard";
 import Theme from "./components/Theme";
 import ToggleSwitch from "./components/ToggleSwitch";
+import DynamicLayout from "./components/DynamicLayout";
 
 function App() {
   const addFavorite = (book: BookCardProps) => {
@@ -45,8 +46,9 @@ function App() {
         <Navbar />
 
         <Routes>
+          <Route path="/" element={<DynamicLayout />} />
           <Route
-            path="/"
+            path="/search"
             element={
               <Home
                 addFavorite={addFavorite}
@@ -56,7 +58,7 @@ function App() {
             }
           />
           <Route
-            path="/categories"
+            path="/categories/:categoryName"
             element={
               <CategoryMenu
                 addFavorite={addFavorite}

@@ -66,9 +66,9 @@ export default function FaveBooks(props: faveBookProps) {
           </div>
         ))
       ) : (
-        <p className="dark:text-orange-200 mb-5">No fave books saved yet</p>
+        <p className="dark:text-orange-200">No fave books saved yet</p>
       )}
-      <button className="w-full bg-[#B5A38A] shadow-lg mt-5" onClick={clear}>
+      <button className="w-full bg-[#B5A38A] shadow-lg" onClick={clear}>
         Clear all
       </button>
     </div>

@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import BookCard, { BookCardProps } from "./BookCard";
 
 interface HomeProps {
-  addFavorite: (book: BookCardProps) => void;
-  removeFavorite: (bookId: string) => void;
-  handleBtn: (book: BookCardProps) => void;
+  addFavorite?: (book: BookCardProps) => void;
+  removeFavorite?: (bookId: string) => void;
+  handleBtn?: (book: BookCardProps) => void;
 }
 
 export default function Home(props: HomeProps) {
@@ -27,6 +27,7 @@ export default function Home(props: HomeProps) {
     setSearch(e.target.value);
 
   const addOrRemoveFaves = (book: BookCardProps) => {
+    if (!props.handleBtn) return;
     props.handleBtn(book);
     setFaveUpdates((prev) => !prev);
   };
@@ -67,8 +68,8 @@ export default function Home(props: HomeProps) {
                 authors={book.authors}
                 summaries={book.summaries}
                 bookshelves={book.bookshelves}
-                addFavorite={props.addFavorite}
-                removeFavorite={props.removeFavorite}
+                addFavorite={props.addFavorite ?? (() => {})}
+                removeFavorite={props.removeFavorite ?? (() => {})}
               />
               <button
                 className="w-full shadow-lg pl-5 mt-5 text-left bg-[#B5A38A] font-semibold"
