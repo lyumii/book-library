@@ -148,7 +148,9 @@ export default function CategoryMenu(props: CategoryProps) {
                 </select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3 mt-5">{bookArray}</div>
+            <div className="categoryels grid grid-cols-2 gap-3 mt-5">
+              {bookArray}
+            </div>
           </div>
         )}
       </div>

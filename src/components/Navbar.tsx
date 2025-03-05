@@ -54,7 +54,7 @@ export default function Navbar() {
               Home
             </span>{" "}
           </Link>
-          <Link to="/search">
+          <Link to="/search/all">
             <span className="text-[#2E2E2E] dark:text-orange-200 uppercase lg:text-xl sm:text-xs font-bold">
               Search
             </span>

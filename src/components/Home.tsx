@@ -54,7 +54,7 @@ export default function Home(props: HomeProps) {
           onSubmit={handleSearch}
         >
           <input
-            className="w-full border-1 border-[#B5A38A] shadow-lg dark:placeholder-orange-200"
+            className="w-full dark:focus:text-white border-1 border-[#B5A38A] shadow-lg dark:placeholder-orange-200"
             type="text"
             placeholder="..EXPLORE OUR LIBRARY"
             onChange={handleInput}
