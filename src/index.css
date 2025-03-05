@@ -38,6 +38,10 @@ a:visited {
 }
 
 @media (max-width: 600px) {
+  body {
+    width: 420px;
+  }
+
   .navdiv h1 {
     font-size: 1em;
     font-weight: 800;
@@ -77,6 +81,38 @@ a:visited {
 
   .selectdiv {
     font-size: 0.8em;
+  }
+
+  .dynamiclayout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .para {
+    font-size: 1em;
+    flex-wrap: nowrap;
+    max-width: 100%;
+  }
+
+  .imgdiv {
+    flex-direction: column-reverse;
+    gap: 0;
+
+    padding: 0;
+    align-items: center;
+  }
+
+  .categories,
+  .home,
+  .favelist {
+    width: 100%;
+  }
+
+  .dynamiclayout img {
+    width: 100vh;
+    margin: 10px 0 0 3px;
   }
 }
 

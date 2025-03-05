@@ -26,13 +26,6 @@ export default function CategoryMenu(props: CategoryProps) {
     if (button && button.textContent) {
       const selectedCategory = button.textContent;
       navigate(`/categories/${selectedCategory}`);
-
-      // setLoading(true);
-
-      // const fetchedBooks = await fetchBooksCategory(button.textContent);
-      // setCategoryArray(fetchedBooks);
-      // setCurrentCattegory(button.textContent);
-      // setLoading(false);
     }
   };
 
@@ -142,7 +135,9 @@ export default function CategoryMenu(props: CategoryProps) {
           <div className="spinner"></div>
         ) : (
           <div>
-            <div className="selectdiv flex gap-3 absolute right-0 -top-4 font-semibold dark:text-orange-100">
+            <div
+              className={`selectdiv ${props.class} hidden flex gap-3 absolute right-0 -top-4 font-semibold dark:text-orange-100`}
+            >
               <h2>Current category: {currentCategory}</h2>
               <div className="flex">
                 <legend>Sort by:</legend>

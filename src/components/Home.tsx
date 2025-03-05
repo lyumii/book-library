@@ -21,10 +21,6 @@ export default function Home(props: HomeProps) {
     event.preventDefault();
     const formattedSearch = search.replace(/\s+/g, "%20");
     navigate(`/search/${formattedSearch}`);
-    // setLoading(true);
-    // const results = await fetchBooksSearch(formattedSearch);
-    // setBooks(results);
-    // setLoading(false);
   };
 
   useEffect(() => {

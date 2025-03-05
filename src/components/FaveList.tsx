@@ -25,10 +25,10 @@ export default function FaveList() {
 
   return (
     <div className="flex flex-col gap-3 justify-between h-full">
-      <h3 className="text-2xl font-bold text-center underline my-5 ">
+      <h3 className="text-2xl dark:text-orange-300 font-bold text-center underline my-5 ">
         Current Faves List:
       </h3>
-      <ul className="list-disc px-5 italic  flex flex-col gap-3 flex-grow">
+      <ul className="list-disc px-5 italic dark:text-orange-200  flex flex-col gap-3 flex-grow">
         {favorites.map((book, index) => (
           <li key={index}>
             {book.title} by{" "}
